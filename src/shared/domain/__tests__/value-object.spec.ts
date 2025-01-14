@@ -13,27 +13,31 @@ class ComplexValueObject extends ValueObject {
 }
 
 describe("ValueObject Unit Tests", () => {
-  test("should be equals", () => {
-    const valueObject1 = new StringValueObject("test");
-    const valueObject2 = new StringValueObject("test");
-    expect(valueObject1.equals(valueObject2)).toBe(true);
+  test("should be equal", () => {
+    const value1 = new StringValueObject("test");
+    const value2 = new StringValueObject("test");
 
-    const complexValueObject1 = new ComplexValueObject("test", 1);
-    const complexValueObject2 = new ComplexValueObject("test", 1);
-    expect(complexValueObject1.equals(complexValueObject2)).toBe(true);
+    expect(value1.equals(value2)).toBeTruthy();
+
+    const complexValue1 = new ComplexValueObject("test", 1);
+    const complexValue2 = new ComplexValueObject("test", 1);
+
+    expect(complexValue1.equals(complexValue2)).toBeTruthy();
   });
 
-  test("should not be equals", () => {
-    const valueObject1 = new StringValueObject("test");
-    const valueObject2 = new StringValueObject("test2");
-    expect(valueObject1.equals(valueObject2)).toBe(false);
-    expect(valueObject1.equals(null as any)).toBe(false);
-    expect(valueObject1.equals(undefined as any)).toBe(false);
+  test("should not be equal", () => {
+    const value1 = new StringValueObject("test");
+    const value2 = new StringValueObject("test2");
 
-    const complexValueObject1 = new ComplexValueObject("test", 1);
-    const complexValueObject2 = new ComplexValueObject("test", 2);
-    expect(complexValueObject1.equals(complexValueObject2)).toBe(false);
-    expect(complexValueObject1.equals(null as any)).toBe(false);
-    expect(complexValueObject2.equals(undefined as any)).toBe(false);
+    expect(value1.equals(value2)).toBeFalsy();
+    expect(value1.equals(null)).toBeFalsy();
+    expect(value2.equals(undefined)).toBeFalsy();
+
+    const complexValue1 = new ComplexValueObject("test", 1);
+    const complexValue2 = new ComplexValueObject("test", 2);
+
+    expect(complexValue1.equals(complexValue2)).toBeFalsy();
+    expect(complexValue1.equals(null)).toBeFalsy();
+    expect(complexValue2.equals(undefined)).toBeFalsy();
   });
 });
