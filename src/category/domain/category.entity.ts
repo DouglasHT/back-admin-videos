@@ -32,22 +32,26 @@ export class Category {
 
   //   factory method
   static create(props: CategoryCreateCommand): Category {
-    return new Category(props);
+    const category = new Category(props);
+    Category.validate(category);
+    return category;
   }
 
   changeName(name: string): void {
     this.name = name;
+    Category.validate(this);
   }
 
   changeDescription(description: string): void {
     this.description = description;
+    Category.validate(this);
   }
 
-  activate(): void {
+  activate() {
     this.is_active = true;
   }
 
-  deactivate(): void {
+  deactivate() {
     this.is_active = false;
   }
 
