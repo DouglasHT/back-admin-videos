@@ -158,3 +158,11 @@ describe("Category Unit Tests", () => {
     expect(category.is_active).toBeFalsy();
   });
 });
+
+describe("Category Validator", () => {
+  describe("create command", () => {
+    // Category.create({
+    //   name: null,
+    // });
+  });
+});
