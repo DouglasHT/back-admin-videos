@@ -1,3 +1,4 @@
+import { EntityValidationError } from "../../../shared/domain/validators/validation.error";
 import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity";
 
@@ -161,8 +162,16 @@ describe("Category Unit Tests", () => {
 
 describe("Category Validator", () => {
   describe("create command", () => {
-    // Category.create({
-    //   name: null,
-    // });
+    test("should throw error when name is empty", () => {
+      expect(() => {
+        Category.create({
+          name: "",
+        });
+      }).toThrow(
+        new EntityValidationError({
+          name: ["name should not be empty"],
+        })
+      );
+    });
   });
 });
