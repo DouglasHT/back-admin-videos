@@ -87,16 +87,6 @@ export abstract class InMemorySearchableRepository<
     filter: Filter | null
   ): Promise<E[]>;
 
-  protected applyPaginate(
-    items: E[],
-    page: SearchParams["page"],
-    per_page: SearchParams["per_page"]
-  ) {
-    const start = (page - 1) * per_page;
-    const end = start + per_page;
-    return items.slice(start, end);
-  }
-
   protected applySort(
     items: E[],
     sort: string | null,
@@ -122,5 +112,15 @@ export abstract class InMemorySearchableRepository<
 
       return 0;
     });
+  }
+
+  protected applyPaginate(
+    items: E[],
+    page: SearchParams["page"],
+    per_page: SearchParams["per_page"]
+  ) {
+    const start = (page - 1) * per_page;
+    const end = start + per_page;
+    return items.slice(start, end);
   }
 }
