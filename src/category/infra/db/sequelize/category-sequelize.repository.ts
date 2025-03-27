@@ -41,7 +41,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
   }
 
   async findById(entity_id: Uuid): Promise<Category | null> {
-    const model = await this.categoryModel.findByPk(entity_id.id);
+    const model = await this._get(entity_id.id);
     return new Category({
       category_id: new Uuid(model.category_id),
       name: model.name,
@@ -49,6 +49,10 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       is_active: model.is_active,
       created_at: model.created_at,
     });
+  }
+
+  private async _get(id: string) {
+    return await this.categoryModel.findByPk(id);
   }
 
   async findAll(): Promise<Category[]> {
