@@ -21,7 +21,9 @@ export class CategoryModelMapper {
       is_active: model.is_active,
       created_at: model.created_at,
     });
+
     Category.validate(entity);
+
     return entity;
   }
 }
